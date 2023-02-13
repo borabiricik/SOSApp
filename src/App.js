@@ -4,6 +4,7 @@ import Map from "./Map";
 
 const App = () => {
   const [dataMarkers, setdataMarkers] = useState(null);
+  const [sosMarkers, setsosMarkers] = useState(null);
   const updateMarker = async () => {
     await axios.get("http://159.65.116.234:3001/get_data").then((response) => {
       var markers = [];
@@ -21,21 +22,27 @@ const App = () => {
 
       setdataMarkers(markers);
     });
+    await axios.get("http://159.65.116.234:3001/get_sos").then((response) => {
+      setsosMarkers(response.data.data);
+    });
   };
   useEffect(() => {
     updateMarker();
+    setTimeout(() => {
+      updateMarker();
+    }, 10000);
   }, []);
 
   return (
     <div>
-      {dataMarkers ? (
+      {dataMarkers && sosMarkers ? (
         <div style={{ display: "flex" }}>
-          <div style={{ height: "100vh", flex: 1 }}>
-            <Map markers={dataMarkers} />
+          <div style={{ height: "100vh", flex: 1, position: "sticky", top: 0 }}>
+            <Map markers={dataMarkers} sosMarkers={sosMarkers} />
           </div>
           <div style={{ width: "20%" }}>
-            {dataMarkers.map((marker, index) => {
-              console.log(marker);
+            <h2>Acil Yardım Çağrıları: </h2>
+            {sosMarkers.map((marker, index) => {
               return (
                 <div style={{ borderBottom: "1px solid black" }}>
                   <p>Plaka: {marker.plate}</p>
