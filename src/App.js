@@ -45,7 +45,7 @@ const App = () => {
             {sosMarkers.map((marker, index) => {
               return (
                 <div style={{ borderBottom: "1px solid black" }}>
-                  <p>Plaka: {marker.plate}</p>
+                  <p>Servis Adı: {marker.plate}</p>
                   <p>Tel.No.{marker.phone}</p>
                   <p>Çağrı Zamanı: {new Date(marker.date).toUTCString()}</p>
                 </div>

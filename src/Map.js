@@ -45,7 +45,7 @@ const Marker = ({ plate, phone, sosMarkers }) => {
             {sosMarkers.find((marker) => marker.plate === plate) && (
               <h2 style={{ margin: 0 }}>Acil Durum Çağrısı !</h2>
             )}
-            <span>Plaka: {plate}</span>
+            <span>Servis Adı: {plate}</span>
             <span>Tel.No.: {phone}</span>
           </div>
         )}
